@@ -1,0 +1,34 @@
+version: '3'
+
+tasks:
+  full-up:
+    cmds:
+      - docker-compose -f ./docker-compose.full.yml up -d --build
+
+  full-down:
+    cmds:
+      - docker-compose -f ./docker-compose.full.yml down --rmi=all --volumes
+
+  infra-up:
+    cmds:
+      - docker-compose -f ./docker-compose.infra.yml up -d
+
+  infra-down:
+    cmds:
+      - docker-compose -f ./docker-compose.infra.yml down --rmi=all --volumes
+
+  kafka-up:
+    cmds:
+      - docker-compose -f ./docker-compose.kafka.yml up -d
+
+  kafka-down:
+    cmds:
+      - docker-compose -f ./docker-compose.kafka.yml down --rmi=all --volumes
+
+  service-run:
+    cmds:
+      - go run ./kafka-test-words-counter/main.go
+  
+  ui-run:
+    cmds:
+      - npm run --prefix ./kafka-test-app-ui dev
